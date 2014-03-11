@@ -9,6 +9,6 @@
     "express": "3.4.4",
     "jade": "*",
     "stylus": "*",
-    "mongodb": "*"
+    "mongodb": ">= 0.9.6-7"
   }
 }
