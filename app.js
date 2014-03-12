@@ -45,11 +45,37 @@ app.get('/employee/new', function(req, res) {
   });
 });
 
+// update an employee
+app.get('/employee/:id/edit', function(req, res) {
+  employeeProvider.findById(req.param('_id'), function(error, employee) {
+    res.render('employee_edit', {
+      employee: employee
+    });
+  });
+});
+
 app.post('/employee/new', function(req, res) {
   employeeProvider.save({
     title: req.param('title'),
     name: req.param('name')
   }, function(error, docs) {
+    res.redirect('/');
+  });
+});
+
+// save updated employee
+app.post('/employee/:id/edit', function(req, res) {
+  employeeProvider.update(req.param('_id'), {
+    title: req.param('title'),
+    name: req.param('name')
+  }, function(error, docs) {
+    res.redirect('/');
+  });
+});
+
+// delete an employee
+app.post('/employee/:id/delete', function(req, res) {
+  employeeProvider.delete(req.param('_id'), function(error, docs) {
     res.redirect('/');
   });
 });
